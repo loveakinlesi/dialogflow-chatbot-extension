@@ -1,0 +1,19 @@
+{
+  "name": "dialogflow-chatbot-extension",
+  "version": "1.0.0",
+  "description": "This is a custom dialogflow chatbot extension for the NOSA chatbot",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iiitma/chatbot-dialogflow-extension.git"
+  },
+  "author": "iiitma",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/iiitma/chatbot-dialogflow-extension/issues"
+  },
+  "homepage": "https://github.com/iiitma/chatbot-dialogflow-extension#readme"
+}

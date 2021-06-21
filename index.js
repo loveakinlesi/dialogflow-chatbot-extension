@@ -1,12 +1,13 @@
 const details = require("./libs/details");
 const credentials = require("./libs/credentials");
-const realtimeDatabase = require("./libs/realtimeDatabase");
+const realtimeData = require("./libs/realtimeDatabase");
 const data = require("./libs/data");
 const responseTypes = require("./libs/responseFunctions");
 
 
  module.exports = class chatbotExtension {
     #extensionData;
+    #extensionRealtimeData;
     #extensionDetails;
     #extensionCredentials;
 
@@ -18,6 +19,7 @@ const responseTypes = require("./libs/responseFunctions");
         this.#details(object.details);
         this.#credentials(object.credentials);
         this.#data();
+        this.#realtimeData();
         console.log('\x1b[36m%s\x1b[0m',`${this.name} Initialized`);
         return this
       }
@@ -28,6 +30,7 @@ const responseTypes = require("./libs/responseFunctions");
       this.databaseURL = this.#extensionDetails.databaseURL;
       this.spreadsheetId = this.#extensionDetails.spreadsheetId;
       this.scopes = this.#extensionDetails.scopes;
+      this.timeZone = this.#extensionDetails.timeZone
     }
     #credentials(credential) {
       this.#extensionCredentials = new credentials(credential);
@@ -35,7 +38,9 @@ const responseTypes = require("./libs/responseFunctions");
     #data(){
       this.#extensionData = new data(this.#extensionCredentials.credentials, this.#extensionDetails);
     }
-    
+    #realtimeData(){
+      this.#extensionRealtimeData = new realtimeData(this.#extensionCredentials.credentials, this.#extensionDetails.databaseURL, this.#extensionDetails.timeZone);
+    }
 
 
     // Requires ${!object?.details && !object?.credentials ? 'credentials and details' : (!object?.credentials ? 'credentials': 'details'
@@ -61,23 +66,48 @@ const responseTypes = require("./libs/responseFunctions");
     getSpreadsheetId() {
       return this.spreadsheetId;
     }
+    getTimezone(){
+      return this.timeZone
+    }
 
 
 
     //Data Library
     getData(sheetName){
-      return this.#extensionData.getData(sheetName);
+      if(!sheetName){
+        throw new Error('\x1b[31m Sheet Name required! \x1b[0m');
+      } else{
+        return this.#extensionData.getData(sheetName);
+      }
+    
     }
-
     getDatabyQuery(sheetName, query){
       return this.#extensionData.getDatabyQuery(sheetName, query);
-
     }
+
+    //Realtime Database
+    authorize({email, ipaddress, deviceDetails, location}){
+      return this.#extensionRealtimeData.authorize({email, ipaddress, deviceDetails, location})
+    }
+    getRealtimeData(tableName){
+      return this.#extensionRealtimeData.getRealtimeData(tableName);
+    }
+    getSessionKey(sessionId){
+      return this.#extensionRealtimeData.getSessionKey(sessionId)
+    }
+    getSession(sessionId){
+      return this.#extensionRealtimeData.getSession(sessionId)
+    }
+    saveQuery(sessionId, response){
+      return this.#extensionRealtimeData.saveQuery(sessionId, response)
+    }
+    saveSession(sessionId, session){
+      return this.#extensionRealtimeData.saveSession(sessionId, session)
+    }  
 
 
 
     // Response Library
-
     ResponseText(data){
      return responseTypes.Text(data)
     }
@@ -93,14 +123,17 @@ const responseTypes = require("./libs/responseFunctions");
     ResponseSuggestion(data){
       return responseTypes.Suggestion(data)
     }
-    ResponseCardType1(data){
-      return responseTypes.CardType1(data)
+    ResponseTextCard(data){
+      return responseTypes.TextCard(data)
     }
-    ResponseCardType2(data){
-      return responseTypes.CardType2(data)
+    ResponseImageCard(data){
+      return responseTypes.ImageCard(data)
     }
-    ResponseCardType3(data){
-      return responseTypes.CardType3(data)
+    ResponseFullCard(data){
+      return responseTypes.FullCard(data)
+    }
+    ResponseContactCard(data){
+      return responseTypes.ContactCard(data)
     }
 
 

@@ -14,7 +14,7 @@ const responseTypes = require("./libs/responseFunctions");
     #extensionCredentials;
 
     initializeApp(object) {
-      if (object === undefined || (typeof object === 'object' && (!object?.credentials || !object?.details))) {
+      if (object === undefined || (typeof object === 'object' && (!object.credentials || !object.details))) {
         throw new Error('\x1b[31m Chatbot Extension failed to Initialize! Both details and credentials are required by ChatbotExtension constructor \x1b[0m');
       }
       else{

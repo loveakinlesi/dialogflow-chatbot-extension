@@ -1,15 +1,31 @@
 # Dialogflow Chatbot Extension
 
+## Table of Contents
+
+ - **[Overview](#overview)**
+ - **[Installation](#installation)**
+ - **[Implementation](#implementation)**
+    - [Details](#details) 
+    - [Data](#data) 
+    - [Response Formatting](#response%20formatting) 
+ - **[Contributing](#contributing)**
+ - **[License](#license)**
+
+
+## Overview
 Dialogflow Chatbot Extension is a Node JS extension for chatbots built with [Dialogflow](https://dialogflow.cloud.google.com/#) and utilize [Firebase](https://firebase.google.com/) Cloud Functions. Dialogflow Chatbot Extension allows connection with Firebase Realtime Database and Google Spreadsheet.
 
-## Installation
 
+## Installation
 Using npm:
 ```zsh
 $ npm install dialogflow-chatbot-extension
 ```
+```js
+const chatbotExtension = require("dialogflow-chatbot-extension");
+```
 
-## Usage
+## Implementation
 
 ```js
 const details = require("./details.json"); 

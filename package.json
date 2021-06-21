@@ -17,7 +17,9 @@
   },
   "homepage": "https://github.com/iiitma/chatbot-dialogflow-extension#readme",
   "dependencies": {
+    "dialogflow-fulfillment": "^0.6.1",
     "firebase-admin": "^9.9.0",
-    "googleapis": "^77.0.0"
+    "googleapis": "^77.0.0",
+    "uuid": "^8.3.2"
   }
 }

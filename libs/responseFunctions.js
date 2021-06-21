@@ -1,3 +1,10 @@
+const {
+       WebhookClient,
+       Card,
+       Suggestion,
+       Image,
+     } = require("dialogflow-fulfillment");
+
 module.exports.Text = function (data) {
        return data.text
    }
@@ -8,46 +15,46 @@ module.exports.List = function (data) {
 }
 
 module.exports.Suggestion = function (data) {
-       return data.suggestions
+       return new Suggestion(data.suggestions);
 }
 
 module.exports.Image = function (data) {
-       return data.imageUrl
+       return new Image(data.imageUrl);
 }
 
-module.exports.CardType1 = function (data) {
-       return {
-           title: data.title,
-           text: data.text,
-           buttonText: data.buttonText,
-           buttonUrl: data.buttonUrl
-       }
+module.exports.TextCard = function (data) {
+       return new Card({
+              title: data.title,
+              text: data.text,
+              buttonText: data.buttonText,
+              buttonUrl: data.buttonUrl
+          })
 }
 
-module.exports.CardType2 = function (data) {
-       return {
-           title: data.title,
-           imageUrl: data.imageUrl,
-           buttonText: data.buttonText,
-           buttonUrl: data.buttonUrl
-       }
+module.exports.ImageCard = function (data) {
+       return new Card({
+              title: data.title,
+              imageUrl: data.imageUrl,
+              buttonText: data.buttonText,
+              buttonUrl: data.buttonUrl
+          })
 }
- module.exports.CardType3 = function (data) {
-       return {
-           title: data.title,
-           text: data.text,
-           imageUrl: data.imageUrl,
-           buttonText: data.buttonText,
-           buttonUrl: data.buttonUrl
-       }
+ module.exports.FullCard = function (data) {
+       return new Card({
+              title: data.title,
+              text: data.text,
+              imageUrl: data.imageUrl,
+              buttonText: data.buttonText,
+              buttonUrl: data.buttonUrl
+          })
 }
 module.exports.ContactCard = function (data) {
-       return {
-           title: 'contact',
-           text: `Contact ${data.text}`,
-           buttonText: "Get Contact Details",
-           buttonUrl: data.buttonUrl
-       }
+       return new Card({
+              title: 'contact',
+              text: `Contact ${data.text}`,
+              buttonText: "Get Contact Details",
+              buttonUrl: data.buttonUrl
+          })
 }
 
 

@@ -1,7 +1,9 @@
-const details = require("./libs/details");
-const credentials = require("./libs/credentials");
-const realtimeData = require("./libs/realtimeDatabase");
-const data = require("./libs/data");
+'use strict';
+
+const Details = require("./libs/details");
+const Credentials = require("./libs/credentials");
+const RealtimeData = require("./libs/realtimeDatabase");
+const Data = require("./libs/data");
 const responseTypes = require("./libs/responseFunctions");
 
 
@@ -25,7 +27,7 @@ const responseTypes = require("./libs/responseFunctions");
       }
     }
     #details(detail) {
-      this.#extensionDetails = new details(detail);
+      this.#extensionDetails = new Details(detail);
       this.name = this.#extensionDetails.name;
       this.databaseURL = this.#extensionDetails.databaseURL;
       this.spreadsheetId = this.#extensionDetails.spreadsheetId;
@@ -33,19 +35,14 @@ const responseTypes = require("./libs/responseFunctions");
       this.timeZone = this.#extensionDetails.timeZone
     }
     #credentials(credential) {
-      this.#extensionCredentials = new credentials(credential);
+      this.#extensionCredentials = new Credentials(credential);
     }
     #data(){
-      this.#extensionData = new data(this.#extensionCredentials.credentials, this.#extensionDetails);
+      this.#extensionData = new Data(this.#extensionCredentials.credentials, this.#extensionDetails);
     }
     #realtimeData(){
-      this.#extensionRealtimeData = new realtimeData(this.#extensionCredentials.credentials, this.#extensionDetails.databaseURL, this.#extensionDetails.timeZone);
+      this.#extensionRealtimeData = new RealtimeData(this.#extensionCredentials.credentials, this.#extensionDetails.databaseURL, this.#extensionDetails.timeZone);
     }
-
-
-    // Requires ${!object?.details && !object?.credentials ? 'credentials and details' : (!object?.credentials ? 'credentials': 'details'
-
-
 
     // Credentials Library
     getCredentials() {

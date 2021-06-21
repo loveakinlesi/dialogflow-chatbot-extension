@@ -1,6 +1,6 @@
 const {google} = require('googleapis');
 
-module.exports = class data {
+module.exports = class Data {
     constructor(credentials, details) {
         this.client = new google.auth.JWT(
             credentials.client_email, 
@@ -27,10 +27,17 @@ module.exports = class data {
 
 
      getData(sheetName){
-        return this.#getDataExtension(sheetName)
+        if(!sheetName){
+            throw new Error('\x1b[31m Sheet Name required! \x1b[0m');
+          } else{
+        return this.#getDataExtension(sheetName);
+          }
     }
 
     async getDatabyQuery(sheetName, query){
+        if(!sheetName || !query){
+            throw new Error('\x1b[31m Sheet Name and query required! \x1b[0m');
+          } else{
         const snapshot = await this.#getDataExtension(sheetName);
         for (const i in snapshot){
             if (snapshot[i].name == query) {
@@ -39,10 +46,15 @@ module.exports = class data {
         }
         return null
     }
+    }
 
 
 
     async #getDataExtension(sheetName){
+
+        if(!sheetName){
+            throw new Error('\x1b[31m Sheet Name required! \x1b[0m');
+          } else{
         const gsapi = google.sheets({version: 'v4', auth: this.client});
         const options = {
             spreadsheetId:  this.spreadsheetId,
@@ -51,8 +63,12 @@ module.exports = class data {
         let data = await gsapi.spreadsheets.values.get(options);
         return this.#toResponse(this.#toObject(data.data.values));
     }
+    }
 
     #toObject(array){
+        if(!array || !Array.isArray(array)) {
+            throw new Error('\x1b[31m Array of objects required! \x1b[0m');
+          } else{
         let result = [];
         let headers = array[0]
         let body = array.slice(1, array.length)
@@ -65,8 +81,11 @@ module.exports = class data {
         }
         return result
     }
+    }
     #toResponse(array){
-        // console.log(array)
+        if(!array || !Array.isArray(array)) {
+            throw new Error('\x1b[31m Array of objects required! \x1b[0m');
+          } else{
         let result = [];
         for (const item of array){
             let index = result.findIndex((r) => r.name == item.name);
@@ -83,7 +102,11 @@ module.exports = class data {
         }
         return result
     }
+    }
     #formatResponse(item){
+        if(!item || typeof(item) !== 'object') {
+            throw new Error('\x1b[31m Invalid Datatype. Object required! \x1b[0m');
+          } else{
         switch (item.type) {
             case 'text':
                 return this.#formatText(item);
@@ -98,6 +121,7 @@ module.exports = class data {
             default:
                 return null
         }
+    }
     }
 
 

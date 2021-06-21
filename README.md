@@ -22,10 +22,10 @@ const chatbot = new chatbotExtension().initializeApp({
 initializeApp takes in two objects: A service account key and details. The details.json file has this format.
 ```json
 {
-    "name": "Chatbot Name", // Custom Chatbot Name
-    "databaseURL": " ", // Firebase Realtime Database url
-    "spreadsheetId": "", // Google Spreadsheet ID
-    "timeZone":  "Africa/Lagos" // Timezone
+    "name": "Chatbot Name",
+    "databaseURL": "Firebase Realtime Database url",
+    "spreadsheetId": "Google Spreadsheet ID",
+    "timeZone":  "Africa/Lagos"
 }
 ```
 

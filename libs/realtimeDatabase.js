@@ -1,7 +1,7 @@
 const admin = require("firebase-admin");
 const { v1: uuidv1 } = require("uuid");
-module.exports = class realtimeDatabase {
-  #timeZone
+module.exports = class RealtimeDatabase {
+    #timeZone
     constructor(credentials, databaseURL, timeZone) {
         admin.initializeApp({
             credential: admin.credential.cert(credentials),
@@ -9,7 +9,7 @@ module.exports = class realtimeDatabase {
           });
           this.#timeZone = timeZone
         this.admin = admin;
-        this.db = admin.database();
+        this.db = this.admin.database();
       }
 
       async authorize({email, ipaddress, deviceDetails, location}){

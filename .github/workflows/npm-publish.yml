@@ -17,7 +17,6 @@ jobs:
           node-version: 12
       - run: npm ci
       - run: npm test
-      - run: npm version minor
 
   publish-npm:
     needs: build

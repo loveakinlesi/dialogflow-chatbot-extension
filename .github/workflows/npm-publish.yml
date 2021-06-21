@@ -12,6 +12,9 @@ jobs:
     name: Update version
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 12.x
       - run: npm version minor
   build:
     name: Test

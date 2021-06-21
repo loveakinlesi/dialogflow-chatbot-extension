@@ -12,14 +12,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/iiitma/chatbot-dialogflow-extension.git"
+    "url": "git+https://github.com/iiitma/dialogflow-chatbot-extension.git"
   },
   "author": "iiitma",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/iiitma/chatbot-dialogflow-extension/issues"
+    "url": "https://github.com/iiitma/dialogflow-chatbot-extensionn/issues"
   },
-  "homepage": "https://github.com/iiitma/chatbot-dialogflow-extension#readme",
+  "homepage": "https://github.com/iiitma/dialogflow-chatbot-extension#readme",
   "dependencies": {
     "dialogflow-fulfillment": "^0.6.1",
     "firebase-admin": "^9.9.0",

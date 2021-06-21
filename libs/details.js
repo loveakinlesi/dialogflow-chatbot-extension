@@ -4,6 +4,7 @@ module.exports = class details {
       this.name = details.name;
       this.databaseURL = this.getDatabaseURL();
       this.spreadsheetId = details.spreadsheetId;
+      this.timeZone = details.timeZone;
       this.scopes = ['https://www.googleapis.com/auth/spreadsheets.readonly'];
     }
     getDetails() {
@@ -22,6 +23,9 @@ module.exports = class details {
     }
     getScopes() {
       return this.scopes;
+    }
+    getTimezone(){
+      return this.timeZone
     }
   }
   

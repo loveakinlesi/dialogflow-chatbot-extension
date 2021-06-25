@@ -1,4 +1,5 @@
 # Dialogflow Chatbot Extension
+[![🚀 Publish](https://github.com/iiitma/dialogflow-chatbot-extension/actions/workflows/publish.yml/badge.svg)](https://github.com/iiitma/dialogflow-chatbot-extension/actions/workflows/publish.yml)
 
 ## Table of Contents
 

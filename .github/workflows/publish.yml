@@ -26,10 +26,6 @@ jobs:
 
       - name: Install project dependecies
         run: npm ci
-
-      - name: Typescript to Javascript
-        run: npm run build
-
       - name: Run Tests
         run: npm test
         

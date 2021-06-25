@@ -44,10 +44,7 @@ jobs:
 
       - name: Install project dependecies
         run: npm ci
-
-      - name: Typescript to Javascript
-        run: npm run build
-
+        
       - name: Create Release
         run: npm run semantic-release
         env: 

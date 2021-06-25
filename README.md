@@ -1,6 +1,10 @@
 # Dialogflow Chatbot Extension
+![npm](https://img.shields.io/npm/v/dialogflow-chatbot-extension?style=plastic)
 [![🚀 Publish](https://github.com/iiitma/dialogflow-chatbot-extension/actions/workflows/publish.yml/badge.svg)](https://github.com/iiitma/dialogflow-chatbot-extension/actions/workflows/publish.yml)
-
+[![CodeQL](https://github.com/iiitma/dialogflow-chatbot-extension/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/iiitma/dialogflow-chatbot-extension/actions/workflows/codeql-analysis.yml)
+![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/npm/dialogflow-chatbot-extension)
+![Snyk Vulnerabilities for npm package version](https://img.shields.io/snyk/vulnerabilities/npm/dialogflow-chatbot-extension@latest?style=plastic)
+[![GitHub license](https://img.shields.io/github/license/iiitma/dialogflow-chatbot-extension)](https://github.com/iiitma/dialogflow-chatbot-extension/blob/main/LICENSE)
 ## Table of Contents
 
  - **[Overview](#overview)**

@@ -1,18 +1,20 @@
 {
   "name": "dialogflow-chatbot-extension",
-  "version": "0.1.0",
+  "version": "0.0.0-development",
   "description": "This is a custom dialogflow chatbot extension for the NOSA chatbot",
   "main": "index.js",
   "scripts": {
     "test": "mocha",
-    "publish": "npm publish"
+    "publish": "npm publish",
+    "acp": "git add . && git-cz && git push",
+    "semantic-release": "semantic-release --branches main"
   },
   "directories": {
     "test": "test"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/iiitma/dialogflow-chatbot-extension.git"
+    "url": "https://github.com/iiitma/dialogflow-chatbot-extension.git"
   },
   "author": "iiitma",
   "license": "MIT",
@@ -28,6 +30,13 @@
   },
   "devDependencies": {
     "chai": "^4.3.4",
-    "mocha": "^9.0.1"
+    "cz-conventional-changelog": "^3.3.0",
+    "mocha": "^9.0.1",
+    "semantic-release": "^17.4.4"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }

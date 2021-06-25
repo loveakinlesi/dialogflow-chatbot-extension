@@ -76,8 +76,8 @@ const responseTypes = require("./libs/responseFunctions");
       } else{
         return this.#extensionData.getData(sheetName);
       }
-    
     }
+    
     getDatabyQuery(sheetName, query){
       return this.#extensionData.getDatabyQuery(sheetName, query);
     }

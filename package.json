@@ -5,7 +5,6 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha",
-    "publish": "npm publish",
     "acp": "git add . && git-cz && git push",
     "semantic-release": "semantic-release --branches main"
   },

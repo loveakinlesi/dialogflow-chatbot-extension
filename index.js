@@ -15,41 +15,41 @@ const responseTypes = require("./libs/responseFunctions");
         throw new Error('\x1b[31m Chatbot Extension failed to Initialize! Both details and credentials are required by ChatbotExtension constructor \x1b[0m');
       }
       else{
-        this.#details(object.details);
-        this.#credentials(object.credentials);
-        this.#data();
-        this.#realtimeData();
+        this._details(object.details);
+        this._credentials(object.credentials);
+        this._data();
+        this._realtimeData();
         console.log('\x1b[36m%s\x1b[0m',`${this.name} Initialized`);
         return this
       }
     }
-    #details(detail) {
-      this.#extensionDetails = new Details(detail);
-      this.name = this.#extensionDetails.name;
-      this.databaseURL = this.#extensionDetails.databaseURL;
-      this.spreadsheetId = this.#extensionDetails.spreadsheetId;
-      this.scopes = this.#extensionDetails.scopes;
-      this.timeZone = this.#extensionDetails.timeZone
+    _details(detail) {
+      this._extensionDetails = new Details(detail);
+      this.name = this._extensionDetails.name;
+      this.databaseURL = this._extensionDetails.databaseURL;
+      this.spreadsheetId = this._extensionDetails.spreadsheetId;
+      this.scopes = this._extensionDetails.scopes;
+      this.timeZone = this._extensionDetails.timeZone
     }
-    #credentials(credential) {
-      this.#extensionCredentials = new Credentials(credential);
+    _credentials(credential) {
+      this._extensionCredentials = new Credentials(credential);
     }
-    #data(){
-      this.#extensionData = new Data(this.#extensionCredentials.credentials, this.#extensionDetails);
+    _data(){
+      this._extensionData = new Data(this._extensionCredentials.credentials, this._extensionDetails);
     }
-    #realtimeData(){
-      this.#extensionRealtimeData = new RealtimeData(this.#extensionCredentials.credentials, this.#extensionDetails.databaseURL, this.#extensionDetails.timeZone);
+    _realtimeData(){
+      this._extensionRealtimeData = new RealtimeData(this._extensionCredentials.credentials, this._extensionDetails.databaseURL, this._extensionDetails.timeZone);
     }
 
     // Credentials Library
     getCredentials() {
-      return this.#extensionCredentials.credentials;
+      return this._extensionCredentials.credentials;
     }
 
 
     // Details Library
     getDetails() {
-      return this.#extensionDetails.details;
+      return this._extensionDetails.details;
     }
     getName() {
       return this.name;
@@ -71,32 +71,32 @@ const responseTypes = require("./libs/responseFunctions");
       if(!sheetName){
         throw new Error('\x1b[31m Sheet Name required! \x1b[0m');
       } else{
-        return this.#extensionData.getData(sheetName);
+        return this._extensionData.getData(sheetName);
       }
     }
     
     getDatabyQuery(sheetName, query){
-      return this.#extensionData.getDatabyQuery(sheetName, query);
+      return this._extensionData.getDatabyQuery(sheetName, query);
     }
 
     //Realtime Database
     authorize({email, ipaddress, deviceDetails, location}){
-      return this.#extensionRealtimeData.authorize({email, ipaddress, deviceDetails, location})
+      return this._extensionRealtimeData.authorize({email, ipaddress, deviceDetails, location})
     }
     getRealtimeData(tableName){
-      return this.#extensionRealtimeData.getRealtimeData(tableName);
+      return this._extensionRealtimeData.getRealtimeData(tableName);
     }
     getSessionKey(sessionId){
-      return this.#extensionRealtimeData.getSessionKey(sessionId)
+      return this._extensionRealtimeData.getSessionKey(sessionId)
     }
     getSession(sessionId){
-      return this.#extensionRealtimeData.getSession(sessionId)
+      return this._extensionRealtimeData.getSession(sessionId)
     }
     saveQuery(sessionId, response){
-      return this.#extensionRealtimeData.saveQuery(sessionId, response)
+      return this._extensionRealtimeData.saveQuery(sessionId, response)
     }
     saveSession(sessionId, session){
-      return this.#extensionRealtimeData.saveSession(sessionId, session)
+      return this._extensionRealtimeData.saveSession(sessionId, session)
     }  
 
 

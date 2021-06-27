@@ -8,10 +8,7 @@ const responseTypes = require("./libs/responseFunctions");
 
 
  module.exports = class chatbotExtension {
-    #extensionData;
-    #extensionRealtimeData;
-    #extensionDetails;
-    #extensionCredentials;
+
 
     initializeApp(object) {
       if (object === undefined || (typeof object === 'object' && (!object.credentials || !object.details))) {

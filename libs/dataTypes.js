@@ -1,7 +1,6 @@
 
 
  class Text {
-     #rawData
     constructor(data){
         this.#rawData = data;
         this.type = data.type

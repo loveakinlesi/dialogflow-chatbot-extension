@@ -1,7 +1,6 @@
 const admin = require("firebase-admin");
 const { v1: uuidv1 } = require("uuid");
 module.exports = class RealtimeDatabase {
-    #timeZone
     constructor(credentials, databaseURL, timeZone) {
         admin.initializeApp({
             credential: admin.credential.cert(credentials),

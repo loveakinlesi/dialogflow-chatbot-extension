@@ -6,20 +6,20 @@ module.exports = class RealtimeDatabase {
             credential: admin.credential.cert(credentials),
             databaseURL: databaseURL,
           });
-          this.#timeZone = timeZone
+          this._timeZone = timeZone
         this.admin = admin;
         this.db = this.admin.database();
       }
 
       async authorize({email, ipaddress, deviceDetails, location}){
-        const user = await this.#getSessionByEmail(email);
+        const user = await this._getSessionByEmail(email);
         if (user){
           return {
             message: "user found",
             sessionId: user.sessionId,
           }
         } else{
-          return this.#createUserSession({email, ipaddress, deviceDetails, location})
+          return this._createUserSession({email, ipaddress, deviceDetails, location})
   
         }
       }
@@ -29,7 +29,7 @@ module.exports = class RealtimeDatabase {
           sessionId: sessionId,
           query: res.queryResult.queryText,
           dateTime: new Date().toLocaleString('en-US', {
-            timeZone: this.#timeZone
+            timeZone: this._timeZone
           }),
           action: res.queryResult.action,
           responseName: res.queryResult.intent.displayName,
@@ -41,11 +41,11 @@ module.exports = class RealtimeDatabase {
 
 
     getRealtimeData(tableName){
-      return this.#getDataExtension(tableName);
+      return this._getDataExtension(tableName);
     }
 
     async getSessionKey(sessionId) {
-      const snapshot = await this.#getDataExtension("sessionkey");
+      const snapshot = await this._getDataExtension("sessionkey");
       for (const i in snapshot) {
         if (snapshot[i].sessionId == sessionId) {
             return snapshot[i].key;
@@ -55,7 +55,7 @@ module.exports = class RealtimeDatabase {
   
     async getSession(sessionId) {
 
-      const snapshot = await this.#getDataExtension("session");
+      const snapshot = await this._getDataExtension("session");
         for (const i in snapshot) {
           if (snapshot[i].sessionId == sessionId) {
             return new Session(snapshot[i])
@@ -73,7 +73,7 @@ module.exports = class RealtimeDatabase {
 
 
 
-    async #getDataExtension(tableName){
+    async _getDataExtension(tableName){
       const tableData = await this.db.ref(tableName).once("value", (snapshot) => {
           let data = snapshot.val();
           return data;
@@ -81,8 +81,8 @@ module.exports = class RealtimeDatabase {
       return tableData.val();
     }
 
-    async #getSessionByEmail(email){
-      const snapshot = await this.#getDataExtension("sessionkey");
+    async _getSessionByEmail(email){
+      const snapshot = await this._getDataExtension("sessionkey");
       for (const i in snapshot) {
         if (snapshot[i].email == email) {
             return snapshot[i];
@@ -92,7 +92,7 @@ module.exports = class RealtimeDatabase {
     }
 
 
-    async #createUserSession({email, ipaddress, deviceDetails, location, name=''}){
+    async _createUserSession({email, ipaddress, deviceDetails, location, name=''}){
       const sessionId = uuidv1();
 
       var users = this.db.ref("session");
@@ -117,7 +117,7 @@ module.exports = class RealtimeDatabase {
         deviceDetails: deviceDetails,
         location: location,
         dataJoined: new Date().toLocaleString('en-US', {
-          timeZone: this.#timeZone
+          timeZone: this._timeZone
         }),
       });
      

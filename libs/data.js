@@ -30,7 +30,7 @@ module.exports = class Data {
         if(!sheetName){
             throw new Error('\x1b[31m Sheet Name required! \x1b[0m');
           } else{
-        return this.#getDataExtension(sheetName);
+        return this._getDataExtension(sheetName);
           }
     }
 
@@ -38,7 +38,7 @@ module.exports = class Data {
         if(!sheetName || !query){
             throw new Error('\x1b[31m Sheet Name and query required! \x1b[0m');
           } else{
-        const snapshot = await this.#getDataExtension(sheetName);
+        const snapshot = await this._getDataExtension(sheetName);
         for (const i in snapshot){
             if (snapshot[i].name == query) {
                 return snapshot[i]
@@ -50,7 +50,7 @@ module.exports = class Data {
 
 
 
-    async #getDataExtension(sheetName){
+    async _getDataExtension(sheetName){
 
         if(!sheetName){
             throw new Error('\x1b[31m Sheet Name required! \x1b[0m');
@@ -61,11 +61,11 @@ module.exports = class Data {
             range: sheetName,
         };
         let data = await gsapi.spreadsheets.values.get(options);
-        return this.#toResponse(this.#toObject(data.data.values));
+        return this._toResponse(this._toObject(data.data.values));
     }
     }
 
-    #toObject(array){
+    _toObject(array){
         if(!array || !Array.isArray(array)) {
             throw new Error('\x1b[31m Array of objects required! \x1b[0m');
           } else{
@@ -82,7 +82,7 @@ module.exports = class Data {
         return result
     }
     }
-    #toResponse(array){
+    _toResponse(array){
         if(!array || !Array.isArray(array)) {
             throw new Error('\x1b[31m Array of objects required! \x1b[0m');
           } else{
@@ -92,32 +92,32 @@ module.exports = class Data {
             if(index < 0){
                 let newItem = {
                     name: item.name,
-                    response: [this.#formatResponse(item)]
+                    response: [this._formatResponse(item)]
                 }
                 result.push(newItem);
             } else if (index >= 0){
                 // console.log(item.name)
-                item ?  result[index].response.push(this.#formatResponse(item)) : null
+                item ?  result[index].response.push(this._formatResponse(item)) : null
             }
         }
         return result
     }
     }
-    #formatResponse(item){
+    _formatResponse(item){
         if(!item || typeof(item) !== 'object') {
             throw new Error('\x1b[31m Invalid Datatype. Object required! \x1b[0m');
           } else{
         switch (item.type) {
             case 'text':
-                return this.#formatText(item);
+                return this._formatText(item);
             case 'card':
-             return this.#formatCard(item);
+             return this._formatCard(item);
             case 'image':
-                return this.#formatImage(item);
+                return this._formatImage(item);
             case 'list':
-                return this.#formatList(item);
+                return this._formatList(item);
             case 'suggestions':
-                return this.#formatSuggestions(item);
+                return this._formatSuggestions(item);
             default:
                 return null
         }
@@ -125,19 +125,19 @@ module.exports = class Data {
     }
 
 
-    #formatText(data) {
+    _formatText(data) {
         return {
             type: data.type,
             text: data.text
         }
     }   
-    #formatImage(data){
+    _formatImage(data){
         return {
             type: data.type,
             imageUrl: data.image
         }
     }
-    #formatCard(data){
+    _formatCard(data){
         let response = {
             type: data.type,
             text : data.text,
@@ -147,13 +147,13 @@ module.exports = class Data {
         };
         return response
     }
-    #formatList(data){
+    _formatList(data){
         return {
             type: data.type,
             list: data.text.split('/n').join(", ")
         }
     }
-    #formatSuggestions(data){
+    _formatSuggestions(data){
         return {
             type: data.type,
             suggestions: data.text.split('/n')

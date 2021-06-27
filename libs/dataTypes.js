@@ -2,7 +2,7 @@
 
  class Text {
     constructor(data){
-        this.#rawData = data;
+        this._rawData = data;
         this.type = data.type
         this.text = data.text
         // return data.text

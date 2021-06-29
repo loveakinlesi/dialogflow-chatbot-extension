@@ -78,7 +78,7 @@ All Data functions
 ````js
 await chatbot.getData(sheetName);
 
-await chatbot.getDatabyQuery(sheetName, query);
+await chatbot.getDatabyQuery(sheetName, query, queryColumn='name'||'response');
 
 await chatbot.authorize({email, ipaddress, deviceDetails, location});
 

@@ -75,8 +75,8 @@ const responseTypes = require("./libs/responseFunctions");
       }
     }
     
-    getDatabyQuery(sheetName, query){
-      return this._extensionData.getDatabyQuery(sheetName, query);
+    getDatabyQuery(sheetName, query, queryColumn="name"){
+      return this._extensionData.getDatabyQuery(sheetName, query, queryColumn);
     }
 
     //Realtime Database

@@ -34,14 +34,21 @@ module.exports = class Data {
           }
     }
 
-    async getDatabyQuery(sheetName, query){
+    async getDatabyQuery(sheetName, query, queryColumn='name'){
         if(!sheetName || !query){
             throw new Error('\x1b[31m Sheet Name and query required! \x1b[0m');
           } else{
         const snapshot = await this._getDataExtension(sheetName);
         for (const i in snapshot){
-            if (snapshot[i].name == query) {
+            if(queryColumn == 'name'){
+            if (snapshot[i][queryColumn] == query) {
                 return snapshot[i]
+            }} else {
+                for (const j in snapshot[i].response){
+                    if (snapshot[i].response[j].text.includes(query)) {
+                        return snapshot[i]
+                    }
+                }
             }
         }
         return null

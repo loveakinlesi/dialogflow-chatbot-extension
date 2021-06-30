@@ -15,7 +15,11 @@ module.exports.List = function (data) {
 }
 
 module.exports.Suggestion = function (data) {
-       return new Suggestion(data.suggestions);
+       let result = []
+       for(const i in data.suggestions)
+        result.push(new Suggestion(data.suggestions[i]));
+
+        return result
 }
 
 module.exports.Image = function (data) {

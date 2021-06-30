@@ -118,7 +118,8 @@ module.exports = class Data {
             case 'text':
                 return this._formatText(item);
             case 'card':
-             return this._formatCard(item);
+            case 'contact':
+            return this._formatCard(item);
             case 'image':
                 return this._formatImage(item);
             case 'list':
@@ -146,6 +147,7 @@ module.exports = class Data {
     }
     _formatCard(data){
         let response = {
+            title: data.name,
             type: data.type,
             text : data.text,
             imageUrl : data.image,

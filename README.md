@@ -97,29 +97,29 @@ await chatbot.saveSession(sessionId, session);
 Dialogflow Chatbot Extension current supports eight(8) response types which are formatted to the appropriate dialogflow-fulfillment datatypes.
 - Text 
 ````js        
- agent.add(nosa.ResponseText(data.response[i])) 
+ agent.add(chatbot.ResponseText(data.response[i])) 
  ````
 - List
 ````js        
- agent.add(nosa.ResponseList(data.response[i])) 
+ agent.add(chatbot.ResponseList(data.response[i])) 
  ````
 - Image
 ````js        
- agent.add(nosa.ResponseImage(data.response[i])) 
+ agent.add(chatbot.ResponseImage(data.response[i])) 
  ````
 - Suggestion
 ````js        
- agent.add(nosa.ResponseSuggestion(data.response[i])) 
+ agent.add(chatbot.ResponseSuggestion(data.response[i])) 
  ````
 - TextCard
 - ImageCard
 - FullCard
 - ContactCard
 ````js        
- agent.add(nosa.ResponseTextCard(data.response[i])) // Text Card
- agent.add(nosa.ResponseImageCard(data.response[i])) // Image Card
- agent.add(nosa.ResponseFullCard(data.response[i])) // Full Card
- agent.add(nosa.ResponseContactCard(data.response[i])) // Contact Card
+ agent.add(chatbot.ResponseTextCard(data.response[i])) // Text Card
+ agent.add(chatbot.ResponseImageCard(data.response[i])) // Image Card
+ agent.add(chatbot.ResponseFullCard(data.response[i])) // Full Card
+ agent.add(chatbot.ResponseContactCard(data.response[i])) // Contact Card
  ````
 
 

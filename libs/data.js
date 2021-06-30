@@ -151,8 +151,8 @@ module.exports = class Data {
             type: data.type,
             text : data.text,
             imageUrl : data.image,
-            buttonText : data.link,
-            buttonUrl : data.cta,
+            buttonText : data.cta,
+            buttonUrl : data.link,
         };
         return response
     }

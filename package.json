@@ -1,7 +1,7 @@
 {
   "name": "dialogflow-chatbot-extension",
   "version": "0.0.0-development",
-  "description": "This is a custom dialogflow chatbot extension for the NOSA chatbot",
+  "description": "This is a custom dialogflow chatbot extension",
   "main": "index.js",
   "scripts": {
     "test": "mocha",

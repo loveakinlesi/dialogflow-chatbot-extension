@@ -1,12 +1,13 @@
 const admin = require("firebase-admin");
 const { v1: uuidv1 } = require("uuid");
 module.exports = class RealtimeDatabase {
-    constructor(credentials, databaseURL, timeZone) {
+    constructor(credentials, databaseURL, timeZone, queryClusterType) {
         admin.initializeApp({
             credential: admin.credential.cert(credentials),
             databaseURL: databaseURL,
           });
-          this._timeZone = timeZone
+          this._timeZone = timeZone;
+          this._queryClusterType = queryClusterType;
         this.admin = admin;
         this.db = this.admin.database();
       }
@@ -34,7 +35,8 @@ module.exports = class RealtimeDatabase {
           action: res.queryResult.action,
           responseName: res.queryResult.intent.displayName,
         }
-        this.db.ref("queryList").push(data)
+        
+        this.db.ref("queryList/" +this._savePath(this._queryClusterType)).push(data)
     }
 
 
@@ -126,6 +128,34 @@ module.exports = class RealtimeDatabase {
         sessionId: sessionId,
       }
 
+    }
+
+    _savePath(queryClusterType='weekly'){
+      Date.prototype.getWeek = function () {
+        var onejan = new Date(this.getFullYear(), 0, 1);
+        var today = new Date(this.getFullYear(), this.getMonth(), this.getDate());
+        var dayOfYear = (today - onejan + 86400000) / 86400000;
+        return Math.ceil(dayOfYear / 7);
+      };
+
+      let current ={
+        day: new Date().getDate(),
+        week: new Date().getWeek(),
+        month: new Date().getMonth() + 1,
+        year: new Date().getFullYear(),
+      } 
+     switch (queryClusterType ? queryClusterType.toLowerCase() : queryClusterType) {
+      case 'daily':
+        return `Year-${current.year}/Month-${current.month}/Day-${current.day}`;
+      case 'weekly':
+        return `Year-${current.year}/Week-${current.week}`;
+      case 'monthly':
+        return `Year-${current.year}/Month-${current.month}`;
+      case 'yearly':
+        return `Year-${current.year}`;
+      default:
+        return `Year-${current.year}/Month-${current.month}`;
+     }
     }
 
 

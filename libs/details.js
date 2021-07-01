@@ -8,6 +8,7 @@ module.exports = class Details {
       this.databaseURL = this.getDatabaseURL();
       this.spreadsheetId = details.spreadsheetId;
       this.timeZone = details.timeZone;
+      this.queryClusterType = details.queryClusterType;
       this.scopes = ['https://www.googleapis.com/auth/spreadsheets.readonly'];
       }
     }
@@ -30,6 +31,9 @@ module.exports = class Details {
     }
     getTimezone(){
       return this.timeZone
+    }
+    getQueryClusterType(){
+      return this.queryClusterType
     }
   }
   

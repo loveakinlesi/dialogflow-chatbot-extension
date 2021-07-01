@@ -46,7 +46,8 @@ initializeApp takes in two objects: A service account key and details. The detai
     "name": "Chatbot Name",
     "databaseURL": "Firebase Realtime Database url",
     "spreadsheetId": "Google Spreadsheet ID",
-    "timeZone":  "Africa/Lagos"
+    "timeZone":  "Africa/Lagos",
+    "queryClusterType": "Saving order for query clusters. daily | weekly | monthly | yearly"
 }
 ```
 

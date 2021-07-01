@@ -30,6 +30,7 @@ const responseTypes = require("./libs/responseFunctions");
       this.spreadsheetId = this._extensionDetails.spreadsheetId;
       this.scopes = this._extensionDetails.scopes;
       this.timeZone = this._extensionDetails.timeZone
+      this.queryClusterType = this._extensionDetails.queryClusterType
     }
     _credentials(credential) {
       this._extensionCredentials = new Credentials(credential);
@@ -38,7 +39,7 @@ const responseTypes = require("./libs/responseFunctions");
       this._extensionData = new Data(this._extensionCredentials.credentials, this._extensionDetails);
     }
     _realtimeData(){
-      this._extensionRealtimeData = new RealtimeData(this._extensionCredentials.credentials, this._extensionDetails.databaseURL, this._extensionDetails.timeZone);
+      this._extensionRealtimeData = new RealtimeData(this._extensionCredentials.credentials, this._extensionDetails.databaseURL, this._extensionDetails.timeZone, this._extensionDetails.queryClusterType);
     }
 
     // Credentials Library
@@ -62,6 +63,9 @@ const responseTypes = require("./libs/responseFunctions");
     }
     getTimezone(){
       return this.timeZone
+    }
+    getQueryClusterType(){
+      return this.queryClusterType
     }
 
 
